@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "587551897511",
+    "firebase_url": "https://project400-events-app.firebaseio.com",
+    "project_id": "project400-events-app",
+    "storage_bucket": "project400-events-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:587551897511:android:936b9a1df60d261d",
+        "android_client_info": {
+          "package_name": "com.mobileapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "587551897511-t4r4ju078ip1ocee6ltthofghqv3ujot.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBN5spdWN_qCvB6EkCOTkNfPQ1eJADFMQM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
