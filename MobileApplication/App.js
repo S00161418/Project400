@@ -1,19 +1,23 @@
 
-import React from 'react'
-import { StyleSheet, Platform, Image, Text, View } from 'react-native'
 import { createSwitchNavigator,createAppContainer } from 'react-navigation'
-// import the different screens
+
 import Loading from './src/Pages/Loading'
 import SignUp from './src/Pages/SignUp'
 import Login from './src/Pages/Login'
 import Main from './src/Pages/Main'
-// create our app's navigation stack
+import Events from './src/Pages/Events'
+import EventInfo from './src/Pages/EventInfo'
+import CreateEvent from './src/Pages/CreateEvent'
 const RootSwitch = createSwitchNavigator(
   {
     Loading,
     SignUp,
     Login,
-    Main
+    Main,
+    Events,
+    EventInfo,
+    CreateEvent
+
   },
   {
     initialRouteName: 'Loading'

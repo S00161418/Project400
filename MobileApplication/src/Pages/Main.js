@@ -1,9 +1,10 @@
 import React from 'react'
-import { StyleSheet, Platform, Image, Text, View,} from 'react-native'
+import { StyleSheet, Platform, Image, Text, View,Button} from 'react-native'
 import firebase from 'react-native-firebase'
-import {Button} from 'native-base'
+
 
 export default class Main extends React.Component {
+ 
   constructor(props){
     super(props)
     
@@ -35,9 +36,10 @@ return (
           Hi {currentUser && currentUser.email}!
         </Text>
 
-        <Button onPress={this.signOutUser}>
-          <Text>Sign Out</Text>
-        </Button>
+        <Button onPress={this.signOutUser} title="Sign Out"/>
+        <Button title="Create Event" onPress={() => this.props.navigation.navigate('CreateEvent')}/>
+        <Button title="Events" onPress={() => this.props.navigation.navigate('Events')}/>
+        
         
         
       </View>
