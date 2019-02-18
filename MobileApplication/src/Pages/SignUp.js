@@ -4,15 +4,25 @@ import firebase from 'react-native-firebase'
 import {addUser} from '../Services/DataBaseService'
 
 export default class SignUp extends React.Component {
-  state = { email: '', password: '', firstName: '', secondName: '', confirmPass: ''}
+  state = { email: '', password: '', userName: '', confirmPass: ''}
 handleSignUp = () => {
-  if(this.state.email && this.state.password){
-  addUser(this.state.email, this.state.password)
-  firebase
-  .auth()
-  .createUserWithEmailAndPassword(this.state.email, this.state.password)
-  .then(() => this.props.navigation.navigate('Main'))
+  if(this.state.email && this.state.password && this.state.userName && this.state.confirmPass){
+    if(this.state.password == this.state.confirmPass){
+      addUser(this.state.email, this.state.password, this.state.userName, this.state.confirmPass)
+    firebase
+    .auth()
+    .createUserWithEmailAndPassword(this.state.email, this.state.password)
+    .then(() => this.props.navigation.navigate('Main'))
+    }
+    else{
+      alert('Passwords do not match!')
+    }
   }
+  else{
+    alert('All fields required!')
+  }
+  
+  
 }
 
 render() {
@@ -28,26 +38,16 @@ render() {
           <Form>
 
           <Item stackedLabel>
-          <Label>First Name</Label>
+          <Label>Username</Label>
           <Input
             
             autoCapitalize="none"
             style={{alignSelf: 'center'}}
-            onChangeText={firstName => this.setState({ firstName })}
-            value={this.state.firstName}
+            onChangeText={userName => this.setState({ userName })}
+            value={this.state.userName}
           />
         </Item>
 
-        <Item stackedLabel>
-          <Label>Second Name</Label>
-          <Input
-            
-            autoCapitalize="none"
-            style={{alignSelf: 'center'}}
-            onChangeText={secondName => this.setState({ secondName })}
-            value={this.state.secondName}
-          />
-        </Item>
         
         <Item stackedLabel>
           <Label>Email</Label>
@@ -71,8 +71,8 @@ render() {
           />
         </Item>
 
-        <Item stackedLabel>
-          <Label>Retype Password</Label>
+        <Item stackedLabel last>
+          <Label>Confirm Password</Label>
           <Input
             secureTextEntry
             autoCapitalize="none"
@@ -87,9 +87,12 @@ render() {
         </Button>
 
 
-        <Button style={{alignSelf: 'center'}} onPress={() => this.props.navigation.navigate('Login')}>
-            <Text>Already have an account? Login</Text>
-        </Button>
+        
+
+        <Text style={{color: 'blue', alignSelf: 'center'}}
+          onPress={() => this.props.navigation.navigate('Login')}>
+          Already have an account? Login
+        </Text>
 
           </Form>
         </Content>

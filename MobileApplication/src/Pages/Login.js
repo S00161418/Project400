@@ -59,11 +59,12 @@ export default class Login extends React.Component {
           <Text>Login</Text>
         </Button>
 
-        <Button
-          style={{ alignSelf: "center"}}
+        
+
+        <Text style={{color: 'blue', alignSelf: 'center'}}
           onPress={() => this.props.navigation.navigate('SignUp')}>
-          <Text>Don't have an account? Sign Up</Text>
-        </Button>
+          Don't have an account? Sign Up
+        </Text>
 
           </Form>
         </Content>

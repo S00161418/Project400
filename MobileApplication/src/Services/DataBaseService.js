@@ -1,9 +1,11 @@
 import { db } from './Database';
 
-export const addUser =  (email,password) => {
+export const addUser =  (email,password,userName,confirmPass) => {
     db.ref('/users').push({
         email: email,
-        password: password
+        password: password,
+        userName: userName,
+        confirmPass: confirmPass
     });
 }
 
