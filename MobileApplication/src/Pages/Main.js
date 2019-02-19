@@ -1,5 +1,8 @@
 import React from 'react'
-import { StyleSheet, Platform, Image, Text, View,Button} from 'react-native'
+import Profile from '../Pages/Profile'
+import CreateEvent from '../Pages/CreateEvent'
+import Events from '../Pages/Events'
+import {Container, Header,Icon,Button,Body, Title, Tabs,Tab, Right} from 'native-base';
 import firebase from 'react-native-firebase'
 
 
@@ -7,12 +10,10 @@ export default class Main extends React.Component {
  
   constructor(props){
     super(props)
-    
    
-
     this.signOutUser = this.signOutUser.bind(this)
   }
-  state = { currentUser: null }
+  state = { currentUser: null, }
 
   componentDidMount() {
     const { currentUser } = firebase.auth()
@@ -27,29 +28,43 @@ signOutUser = async () => {
       console.log(e);
   }
 }
+
+
   
 render() {
-    const { currentUser } = this.state
+  
 return (
-      <View style={styles.container}>
-        <Text>
-          Hi {currentUser && currentUser.email}!
-        </Text>
+      <Container>
+        <Header hasTabs>
+            <Body>
+             <Title  style={{ alignSelf: "center"}}>Logo</Title>
+            </Body>
+            <Right>
+            <Button transparent onPress={this.signOutUser}>
+              <Icon name="log-out" />
+            </Button>
+            </Right>
+        </Header>
+          
+        <Tabs>
+          <Tab heading="Profile">
+            <Profile/>
+          </Tab>
+          <Tab heading="Events">
+            <Events/>
+          </Tab>
+          <Tab heading="Create Event">
+            <CreateEvent/>
+          </Tab>
+        </Tabs>
 
-        <Button onPress={this.signOutUser} title="Sign Out"/>
-        <Button title="Create Event" onPress={() => this.props.navigation.navigate('CreateEvent')}/>
-        <Button title="Events" onPress={() => this.props.navigation.navigate('Events')}/>
+        
+
         
         
         
-      </View>
+        
+      </Container>
     )
   }
 }
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  }
-})

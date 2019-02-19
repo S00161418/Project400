@@ -14,6 +14,9 @@ export default class Login extends React.Component {
       .then(() => this.props.navigation.navigate('Main'))
       
   }
+  else{
+    alert('All fields required!')
+  }
   
   }
   render() {
