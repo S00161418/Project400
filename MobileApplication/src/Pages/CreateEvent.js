@@ -1,75 +1,90 @@
 import React from 'react'
-import {Text, TouchableOpacity,TextInput, View,Button,StyleSheet} from 'react-native';
+import {Container,Input,Form,Button,Text,Textarea, Content, Item, Label,DatePicker} from 'native-base';
 import {createEvent} from '../Services/DataBaseService'
-import DateTimePicker from 'react-native-modal-datetime-picker';
+
 
 export default class CreateEvent extends React.Component {
+  constructor(props) {
+    super(props);
+   
+    this.setDate = this.setDate.bind(this);
+  }
+  state = { eventName: '', eventDescription: '', chosenDate: new Date()}
 
-  state = {datetime: '', eventName: '', eventDescription: '',errorMessage: null,isDateTimePickerVisible: false, }
-
-  _showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true });
  
-  _hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
- 
-  _handleDatePicked = (date) => {
-    console.log('A date has been picked: ', date);
-    this.setState({datetime: date})
-    this._hideDateTimePicker();
-  };
 
   handleSubmit = () => {
-  if(this.state.eventName && this.state.eventDescription && this.state.datetime){
-  createEvent(this.state.eventName,this.state.eventDescription,this.state.datetime)
+  if(this.state.eventName && this.state.eventDescription && this.state.chosenDate){
+  createEvent(this.state.eventName,this.state.eventDescription,this.state.chosenDate)
+
+  this.setState({
+    eventName: '',
+    eventDescription: '',
+    chosenDate: new Date()
+  })
+
   }
+  }
+
+  setDate(newDate) {
+    this.setState({ chosenDate: newDate });
   }
     render() {
-      
+      var today = new Date()
       return (
-        <View>
-          <Button onPress={() => this.props.navigation.navigate('Main')} title="Go Back"/>
-          <TextInput
-          style={styles.textInput}
-          autoCapitalize="none"
-          placeholder="Event Name"
-          onChangeText={eventName => this.setState({eventName })}
-          value={this.state.eventName}
-        />
-        <TextInput
-          style={styles.textInput}
-          autoCapitalize="none"
-          placeholder="Event Description"
-          onChangeText={eventDescription => this.setState({ eventDescription })}
-          value={this.state.eventDescription}
-        />
-        
-        
-        <Button onPress={this._showDateTimePicker} title='Pick Date and Time'/>
-         
-        <DateTimePicker
-          isVisible={this.state.isDateTimePickerVisible}
-          mode={'datetime'}
-          onConfirm={this._handleDatePicked}
-          onCancel={this._hideDateTimePicker}
-        />
-       
-       
-        <Button onPress={this.handleSubmit} title="Create Event"/>
-        </View>
+        <Container>
+          <Content >
+            <Form>
+              <Item stackedLabel >
+              <Label>Event Name</Label>
+                <Input
+                style={{marginTop:10}}
+                  autoCapitalize="none"
+                  onChangeText={eventName => this.setState({eventName })}
+                  value={this.state.eventName}
+                />
+              </Item>
+              
+              <Label style={{marginLeft:15, marginTop:10}}>Event Description</Label>
+                <Textarea
+                  style={{marginLeft:15, marginRight:15}}
+                  rowSpan={5}
+                  bordered
+                  autoCapitalize="none"
+                  onChangeText={eventDescription => this.setState({ eventDescription })}
+                  value={this.state.eventDescription}
+                />
+              
+
+              
+            <Item stackedLabel>
+            <Label>Choose Date</Label>
+            <DatePicker
+            defaultDate={today.getDate()}
+            minimumDate={new Date(2019, 1, 1)}
+            maximumDate={new Date(2019, 12, 31)}
+            locale={"en"}
+            timeZoneOffsetInMinutes={undefined}
+            modalTransparent={false}
+            animationType={"fade"}
+            androidMode={"default"}
+            placeHolderText="Click here to choose date!"
+            textStyle={{ color: "green" }}
+            placeHolderTextStyle={{ color: "#d3d3d3" }}
+            onDateChange={this.setDate}
+            disabled={false}
+            />
+            </Item>
+
+            <Button style={{alignSelf:'center', margin: 10}} onPress={this.handleSubmit}>
+              <Text>Create</Text>
+            </Button>
+
+  	        </Form> 
+          </Content>
+        </Container>
       );
     }
   }
 
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center'
-    },
-    textInput: {
-      height: 40,
-      width: '90%',
-      borderColor: 'gray',
-      borderWidth: 1,
-      marginTop: 8
-    }
-  })
+ 

@@ -1,6 +1,7 @@
 
 import React from 'react'
-import { View, Text, ActivityIndicator, StyleSheet } from 'react-native'
+
+import { Container, Header, Content, Spinner } from 'native-base';
 import firebase from 'react-native-firebase'
 
 export default class Loading extends React.Component{
@@ -13,18 +14,13 @@ export default class Loading extends React.Component{
   
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Loading</Text>
-        <ActivityIndicator size="large" />
-      </View>
+      <Container>
+        <Header />
+        <Content>
+          <Spinner color='blue' />
+        </Content>
+      </Container>
     )
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  }
-})

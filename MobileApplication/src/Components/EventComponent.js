@@ -31,14 +31,14 @@ export default class EventComponent extends Component {
 const styles = StyleSheet.create({
     
     eventBox: {
-      padding:10,
+      padding:5,
       marginTop:5,
-      marginBottom:5,
+      
       flexDirection: 'row',
     },
     
     eventList:{
-      marginTop:20,
+      marginTop:5,
      
     },
     

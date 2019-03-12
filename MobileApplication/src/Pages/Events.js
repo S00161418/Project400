@@ -2,7 +2,6 @@ import React from 'react'
 import {Text, View, Button} from 'react-native';
 import firebase from 'react-native-firebase'
 import EventComponent from '../Components/EventComponent'
-import { List, ListItem } from 'react-native-elements'
 
 let eventsRef = firebase.database().ref('/users/events')
 
@@ -32,7 +31,7 @@ componentDidMount() {
       console.log(this.state.events)
       return (
         <View>
-          <Button onPress={ () => this.props.navigation.navigate('Main')} title="Go Back"/>
+         
          {
             
               this.state.events.length > 0

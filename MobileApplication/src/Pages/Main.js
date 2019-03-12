@@ -37,7 +37,7 @@ return (
       <Container>
         <Header hasTabs>
             <Body>
-             <Title  style={{ alignSelf: "center"}}>Logo</Title>
+            <Title  style={{ alignSelf: "center"}}>(Logo)</Title>
             </Body>
             <Right>
             <Button transparent onPress={this.signOutUser}>
@@ -47,12 +47,14 @@ return (
         </Header>
           
         <Tabs>
-          <Tab heading="Profile">
-            <Profile/>
-          </Tab>
           <Tab heading="Events">
             <Events/>
           </Tab>
+        
+          <Tab heading="Profile">
+            <Profile/>
+          </Tab>
+          
           <Tab heading="Create Event">
             <CreateEvent/>
           </Tab>
