@@ -3,7 +3,7 @@ import {Text, View, Button} from 'react-native';
 import firebase from 'react-native-firebase'
 import EventComponent from '../Components/EventComponent'
 
-let eventsRef = firebase.database().ref('/users/events')
+let eventsRef = firebase.database().ref('/events')
 
 export default class Events extends React.Component {
 

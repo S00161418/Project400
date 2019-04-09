@@ -1,6 +1,11 @@
 import React from 'react'
 import {Container,Input,Form,Button,Text,Textarea, Content, Item, Label,DatePicker} from 'native-base';
-import {createEvent} from '../Services/DataBaseService'
+import {createEvent, createEventUser} from '../Services/DataBaseService'
+import firebase from 'react-native-firebase'
+
+
+
+
 
 
 export default class CreateEvent extends React.Component {
@@ -11,12 +16,14 @@ export default class CreateEvent extends React.Component {
   }
   state = { eventName: '', eventDescription: '', chosenDate: new Date()}
 
- 
+ componentDidMount(){
+ this.user1 = firebase.auth().currentUser
+ }
 
   handleSubmit = () => {
   if(this.state.eventName && this.state.eventDescription && this.state.chosenDate){
+  createEventUser(this.user1,this.state.eventName,this.state.eventDescription,this.state.chosenDate)
   createEvent(this.state.eventName,this.state.eventDescription,this.state.chosenDate)
-
   this.setState({
     eventName: '',
     eventDescription: '',

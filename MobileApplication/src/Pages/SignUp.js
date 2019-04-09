@@ -8,10 +8,11 @@ export default class SignUp extends React.Component {
 handleSignUp = () => {
   if(this.state.email && this.state.password && this.state.userName && this.state.confirmPass){
     if(this.state.password == this.state.confirmPass){
-      addUser(this.state.email, this.state.password, this.state.userName, this.state.confirmPass)
+     
     firebase
     .auth()
     .createUserWithEmailAndPassword(this.state.email, this.state.password)
+    .then( user =>{ addUser(user.user,this.state.email, this.state.password, this.state.userName, this.state.confirmPass)})
     .then(() => this.props.navigation.navigate('Main'))
     }
     else{
@@ -21,6 +22,7 @@ handleSignUp = () => {
   else{
     alert('All fields required!')
   }
+  
   
   
 }

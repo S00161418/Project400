@@ -1,13 +1,26 @@
 import React from 'react'
-import {Text, View} from 'react-native';
+import { Container, Header,Label,Text, Content, Form, Item,Button,Body,Input, Title } from 'native-base';
+import Picture from '../Components/PictureComponent'
+import ProfilePicker from '../Components/ProfilePicker'
+import {withNavigation} from 'react-navigation'
 
-export default class Profile extends React.Component {
+class Profile extends React.Component {
+
+  
     render() {
-      
+
       return (
-        <View>
-          <Text>Profile</Text>
-        </View>
+      <Container>
+         <Picture />
+         <ProfilePicker/>
+
+         <Button style={{alignSelf: 'center', margin: 10}} onPress={() => this.props.navigation.navigate('Interests')}>
+           <Text>Choose Interests</Text>
+         </Button>
+         
+      </Container>
       );
     }
   }
+
+  export default withNavigation(Profile);
