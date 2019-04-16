@@ -1,8 +1,8 @@
 import React from 'react'
-import { Container, Header,Label,Text,Icon, Content, Form, Item,Button,Body,Input, Title, Left } from 'native-base';
+import { Container,Spinner, Header,Icon,Button,Body, Title, Left } from 'native-base';
 import firebase from 'react-native-firebase'
 import InterestsComponent from '../Components/InterestsComponent'
-import {withNavigation} from 'react-navigation'
+
 
 let interestsRef = firebase.database().ref('/interests')
 
@@ -46,7 +46,7 @@ componentDidMount() {
             
               this.state.interests.length > 0
               ? <InterestsComponent interests={this.state.interests} />
-              : <Text>No items</Text>
+              : <Spinner color='blue' />
           
          }
         

@@ -1,5 +1,6 @@
 import React from 'react'
 import {Text, View, Button} from 'react-native';
+import { Container, Header, Content, Spinner } from 'native-base';
 import firebase from 'react-native-firebase'
 import EventComponent from '../Components/EventComponent'
 
@@ -36,7 +37,7 @@ componentDidMount() {
             
               this.state.events.length > 0
               ? <EventComponent events={this.state.events} />
-              : <Text>No items</Text>
+              : <Spinner color='blue' />
           
          }
         
