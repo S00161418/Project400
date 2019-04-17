@@ -9,32 +9,34 @@ export const addUser =  (user,email,password,userName,confirmPass) => {
     });
 }
 
-export const createEventUser = (user,eventName, eventDescription,eventDateTime) => {
+export const createEventUser = (user,eventName, eventDescription,eventDateTime,eventInterest) => {
     db.ref(`/users/${user.uid}/events`).push({
         eventName: eventName,
         eventDescription: eventDescription,
-        eventDateTime: eventDateTime
+        eventDateTime: eventDateTime,
+        eventInterest: eventInterest
 
     })
 }
 
-export const createEvent = (eventName, eventDescription,eventDateTime) => {
+export const createEvent = (eventName, eventDescription,eventDateTime,eventInterest) => {
     db.ref('/events').push({
         eventName: eventName,
         eventDescription: eventDescription,
-        eventDateTime: eventDateTime
+        eventDateTime: eventDateTime,
+        eventInterest: eventInterest
 
     })
 }
 
 export const addInterest = (user,interest) => {
     db.ref(`/users/${user.uid}/interest/${interest}`).set({
-        intertestName: interest,
+        interestName: interest,
     })
 }
 
 export const deleteInterest = (user,interest) => {
     db.ref(`/users/${user.uid}/interest/${interest}`).remove({
-        intertestName: interest
+        interestName: interest
     })
 }

@@ -17,7 +17,7 @@ export default class EventComponent extends Component {
                 <View style={styles.eventContent}>
                 <Text  style={styles.eventTime}>Event Time: {events.eventDateTime}</Text>
                   <Text  style={styles.userName}>Event: {events.eventName}</Text>
-                  <Text  style={styles.description}>Description: {events.eventDescription}</Text>
+                  <Text  style={styles.description}>Interest: {events.eventInterest}</Text>
                   
                 </View>
             </View>

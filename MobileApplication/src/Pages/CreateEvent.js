@@ -2,6 +2,7 @@ import React from 'react'
 import {Container,Input,Form,Button,Text,Textarea, Content, Item, Label,DatePicker} from 'native-base';
 import {createEvent, createEventUser} from '../Services/DataBaseService'
 import firebase from 'react-native-firebase'
+import {Picker} from 'react-native'
 
 
 
@@ -14,16 +15,30 @@ export default class CreateEvent extends React.Component {
    
     this.setDate = this.setDate.bind(this);
   }
-  state = { eventName: '', eventDescription: '', chosenDate: new Date()}
+  state = { eventName: '', eventDescription: '', chosenDate: new Date(), interest: [],selectedInterest:''}
+
+  
+
+ 
 
  componentDidMount(){
  this.user1 = firebase.auth().currentUser
+ let interestRef = firebase.database().ref(`/users/${this.user1.uid}/interest`)
+ interestRef.on('value', (snapshot) => {
+      let interests = snapshot.val();
+      
+      let data = Object.values(interests)
+      
+      
+      this.setState({interest: data})
+      console.log(this.state.interest)
+   })
  }
 
   handleSubmit = () => {
-  if(this.state.eventName && this.state.eventDescription && this.state.chosenDate){
-  createEventUser(this.user1,this.state.eventName,this.state.eventDescription,this.state.chosenDate)
-  createEvent(this.state.eventName,this.state.eventDescription,this.state.chosenDate)
+  if(this.state.eventName && this.state.eventDescription && this.state.chosenDate && this.state.selectedInterest){
+  createEventUser(this.user1,this.state.eventName,this.state.eventDescription,this.state.chosenDate,this.state.selectedInterest)
+  createEvent(this.state.eventName,this.state.eventDescription,this.state.chosenDate,this.state.selectedInterest)
   this.setState({
     eventName: '',
     eventDescription: '',
@@ -33,15 +48,34 @@ export default class CreateEvent extends React.Component {
   }
   }
 
+  updateSelect(value){
+    this.setState({selectedInterest: value})
+    console.log(this.state.selectedInterest)
+  }
+
   setDate(newDate) {
     this.setState({ chosenDate: newDate });
   }
     render() {
       var today = new Date()
+      console.log(this.state.interest)
       return (
         <Container>
           <Content >
             <Form>
+             <Label style={{marginLeft:15, marginTop:10}}>Choose Event Interest</Label>
+            <Picker
+              style={{marginLeft:15}}
+selectedValue={this.state.selectedInterest }
+onValueChange={(value) => this.updateSelect(value)}>
+<Picker.Item label="Select Interest" value={null}/>
+{
+  this.state.interest.map( (v,i)=>{
+   return <Picker.Item label={v.interestName} value={v.interestName} key={i} />
+  })
+ }
+</Picker>
+
               <Item stackedLabel >
               <Label>Event Name</Label>
                 <Input
