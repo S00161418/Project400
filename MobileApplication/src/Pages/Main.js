@@ -59,12 +59,6 @@ return (
             <CreateEvent/>
           </Tab>
         </Tabs>
-
-        
-
-        
-        
-        
         
       </Container>
     )

@@ -65,7 +65,7 @@ updateEvent(value){
       return (
         <View>
           <Picker
-              style={{marginLeft:15}}
+              style={{marginLeft:15, height:40}}
               
 selectedValue={this.state.selectedInterest}
 onValueChange={(value) => this.updateEvent(value)}

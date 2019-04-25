@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import {  View, Text, StyleSheet,ScrollView} from 'react-native';
+import {  View, Text, StyleSheet,TouchableOpacity,ScrollView} from 'react-native';
+
 
 
 
@@ -10,20 +11,28 @@ export default class EventComponent extends Component {
 
   render() {
     return (
-      <ScrollView style={styles.eventList}>
+      
+      <ScrollView contentContainerStyle={styles.eventBox}>
         {this.props.events.map((events, index) => {
             return (
-            <View style={styles.eventBox} key={index}>
-                <View style={styles.eventContent}>
-                <Text  style={styles.eventTime}>Event Time: {events.eventDateTime}</Text>
-                  <Text  style={styles.userName}>Event: {events.eventName}</Text>
-                  <Text  style={styles.description}>Interest: {events.eventInterest}</Text>
+              <View key={index}>
+              <TouchableOpacity  onPress={ () => alert('Clicked')}>
+           
+                <View style={styles.eventContent}  >
+                <Text  style={styles.userName}> {events.eventName}</Text>
+                  <View style={{flexDirection: 'row'}}>
+                  <Text  style={styles.interest}>{events.eventInterest}</Text>
                   
-                </View>
+                  <Text  style={styles.eventTime}> {events.eventDateTime}</Text>
+                  </View>
+                 </View>
+          
+            </TouchableOpacity>
             </View>
             )
         })}
       </ScrollView>
+      
     );
   }
 }
@@ -31,37 +40,41 @@ export default class EventComponent extends Component {
 const styles = StyleSheet.create({
     
     eventBox: {
-      padding:5,
-      marginTop:5,
+     
       
-      flexDirection: 'row',
+      backgroundColor: "#DCDCDC",
+      paddingBottom: 50,
+      
     },
     
-    eventList:{
-      marginTop:5,
-     
-    },
+    
     
     eventContent: {
-      flex:1,
-      flexDirection: 'column',
-      alignItems: 'flex-start',
-      marginLeft:10,
+      
+     
+      marginTop:10,
+      marginLeft:5,
+      marginRight: 5,
       backgroundColor: '#FFFFFF',
       padding:10,
       borderRadius:10
     },
-    description:{
+    interest:{
       fontSize:15,
       color: "#646464",
+     
     },
    
     userName:{
-      fontSize:16,
-      color:"#151515",
-    },
-    eventTime:{
       fontSize:18,
       color:"#151515",
+      alignSelf: 'center',
+    },
+    eventTime:{
+      fontSize:15,
+      color:"#646464",
+      marginLeft: 'auto'
+
+      
     },
   });
