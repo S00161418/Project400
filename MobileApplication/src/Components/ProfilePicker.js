@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Container, Content, Form, Item, Picker,Label } from 'native-base';
+import { Container, Content, Form, Item, Picker, Label } from 'native-base';
 export default class ProfilePicker extends Component {
-    constructor(props) {
+  constructor(props) {
     super(props);
     this.state = {
       Age: undefined,
@@ -23,10 +23,10 @@ export default class ProfilePicker extends Component {
     return (
       <Container>
         <Content>
-          <Form style={{margin:5}}>
-          <Label>Choose Gender</Label>
+          <Form style={{ margin: 5 }}>
+            <Label>Choose Gender</Label>
             <Item picker>
-            
+
               <Picker
                 mode="dropdown"
                 style={{ width: undefined }}
@@ -38,12 +38,12 @@ export default class ProfilePicker extends Component {
               >
                 <Picker.Item label="Male" value="Male" />
                 <Picker.Item label="Female" value="Female" />
-               
+
               </Picker>
             </Item>
             <Label>Choose Age Range</Label>
-            <Item  picker>
-            
+            <Item picker>
+
               <Picker
                 mode="dropdown"
                 style={{ width: undefined }}

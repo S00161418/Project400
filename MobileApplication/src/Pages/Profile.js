@@ -1,26 +1,35 @@
 import React from 'react'
-import { Container, Header,Label,Text, Content, Form, Item,Button,Body,Input, Title } from 'native-base';
-import Picture from '../Components/PictureComponent'
+import { Container, Header, Label, Text, Content, Form, Item, Button, Body, Input, Title } from 'native-base';
+
 import ProfilePicker from '../Components/ProfilePicker'
-import {withNavigation} from 'react-navigation'
+import { ScrollView } from 'react-native'
+import { withNavigation } from 'react-navigation'
+import Interests from '../Pages/Interests'
 
 class Profile extends React.Component {
-
-  
-    render() {
-
-      return (
-      <Container>
-         <Picture />
-         <ProfilePicker/>
-
-         <Button style={{alignSelf: 'center', margin: 10}} onPress={() => this.props.navigation.navigate('Interests')}>
-           <Text>Choose Interests</Text>
-         </Button>
-         
-      </Container>
-      );
-    }
+  state = {
+    test: false
   }
 
-  export default withNavigation(Profile);
+  testfunc() {
+    this.setState({ test: true })
+  }
+
+  render() {
+
+    return (
+      <Container>
+
+
+
+
+        <Label style={{ alignSelf: 'center', marginTop: 15 }}>Choose Interests</Label>
+
+        <Interests />
+
+      </Container>
+    );
+  }
+}
+
+export default withNavigation(Profile);

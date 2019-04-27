@@ -15,34 +15,44 @@ export default class CreateEvent extends React.Component {
 
     this.setDate = this.setDate.bind(this);
   }
-  state = { eventName: '', eventDescription: '', chosenDate: new Date(), interest: [], selectedInterest: '' }
+  state = { eventName: '', eventDescription: '', chosenDate: new Date(), interest: [], selectedInterest: '', location: '' }
 
-
+  Mounted = false
 
 
 
   componentDidMount() {
-    this.user1 = firebase.auth().currentUser
-    let interestRef = firebase.database().ref(`/users/${this.user1.uid}/interest`)
-    interestRef.on('value', (snapshot) => {
-      let interests = snapshot.val();
+    this.Mounted = true
 
-      let data = Object.values(interests)
+    if (this.Mounted) {
+      this.user1 = firebase.auth().currentUser
+      let interestRef = firebase.database().ref(`/users/${this.user1.uid}/interest`)
+      interestRef.on('value', (snapshot) => {
+        let interests = snapshot.val();
+
+        let data = Object.values(interests)
 
 
-      this.setState({ interest: data })
-      console.log(this.state.interest)
-    })
+        this.setState({ interest: data })
+        console.log(this.state.interest)
+      })
+    }
+  }
+
+  componentWillUnmount() {
+    this.Mounted = false
   }
 
   handleSubmit = () => {
-    if (this.state.eventName && this.state.eventDescription && this.state.chosenDate && this.state.selectedInterest) {
-      createEventUser(this.user1, this.state.eventName, this.state.eventDescription, this.state.chosenDate, this.state.selectedInterest)
-      createEvent(this.state.eventName, this.state.eventDescription, this.state.chosenDate, this.state.selectedInterest)
+    if (this.state.eventName && this.state.eventDescription && this.state.chosenDate && this.state.selectedInterest && this.state.location) {
+      createEventUser(this.user1, this.state.eventName, this.state.eventDescription, this.state.chosenDate, this.state.selectedInterest, this.state.location)
+      createEvent(this.state.eventName, this.state.eventDescription, this.state.chosenDate, this.state.selectedInterest,this.state.location)
+      alert('Event Created!')
       this.setState({
         eventName: '',
         eventDescription: '',
-        chosenDate: new Date()
+        chosenDate: new Date(),
+        location: ''
       })
 
     }
@@ -64,7 +74,7 @@ export default class CreateEvent extends React.Component {
       <Container>
         <Content >
           <Form>
-            <Label style={{ marginLeft: 15, marginTop: 10 }}>Choose Event Interest</Label>
+            <Label style={{ marginLeft: 15, marginTop: 10, fontSize: 15, color: 'black' }}>Choose Event Interest</Label>
             <Picker
               style={{ marginLeft: 15 }}
               selectedValue={this.state.selectedInterest}
@@ -87,9 +97,21 @@ export default class CreateEvent extends React.Component {
               />
             </Item>
 
+            <Item stackedLabel>
+              <Label>Location</Label>
+              <Input 
+                style={{ marginTop: 10 }}
+                placeholder = 'Location of Event'
+                autoCapitalize="none"
+                onChangeText={location => this.setState({location})}
+                value={this.state.location}>
+              
+              </Input>
+            </Item>
+
             <Label style={{ marginLeft: 15, marginTop: 10 }}>Event Description</Label>
             <Textarea
-              style={{ marginLeft: 15, marginRight: 15 }}
+              style={{ marginLeft: 15, marginRight: 15, fontSize: 15, color: 'black' }}
               rowSpan={5}
               bordered
               autoCapitalize="none"

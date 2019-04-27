@@ -1,6 +1,6 @@
 import { db } from './Database';
 
-export const addUser =  (user,email,password,userName,confirmPass) => {
+export const addUser = (user, email, password, userName, confirmPass) => {
     db.ref(`/users/${user.uid}/info`).set({
         email: email,
         password: password,
@@ -9,33 +9,36 @@ export const addUser =  (user,email,password,userName,confirmPass) => {
     });
 }
 
-export const createEventUser = (user,eventName, eventDescription,eventDateTime,eventInterest) => {
+
+
+export const createEventUser = (user, eventName, eventDescription, eventDateTime, eventInterest,location) => {
+
     db.ref(`/users/${user.uid}/events`).push({
         eventName: eventName,
         eventDescription: eventDescription,
         eventDateTime: eventDateTime,
-        eventInterest: eventInterest
-
+        eventInterest: eventInterest,
+        location: location
     })
 }
 
-export const createEvent = (eventName, eventDescription,eventDateTime,eventInterest) => {
+export const createEvent = (eventName, eventDescription, eventDateTime, eventInterest,location) => {
     db.ref('/events').push({
         eventName: eventName,
         eventDescription: eventDescription,
         eventDateTime: eventDateTime,
-        eventInterest: eventInterest
-
+        eventInterest: eventInterest,
+        location: location
     })
 }
 
-export const addInterest = (user,interest) => {
+export const addInterest = (user, interest) => {
     db.ref(`/users/${user.uid}/interest/${interest}`).set({
         interestName: interest,
     })
 }
 
-export const deleteInterest = (user,interest) => {
+export const deleteInterest = (user, interest) => {
     db.ref(`/users/${user.uid}/interest/${interest}`).remove({
         interestName: interest
     })

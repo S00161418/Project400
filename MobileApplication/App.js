@@ -1,5 +1,5 @@
 
-import { createSwitchNavigator,createAppContainer } from 'react-navigation'
+import { createSwitchNavigator,createStackNavigator,createAppContainer } from 'react-navigation'
 
 import Loading from './src/Pages/Loading'
 import SignUp from './src/Pages/SignUp'
@@ -10,15 +10,15 @@ import Interests from './src/Pages/Interests'
 import Profile from './src/Pages/Profile'
 
 
-const RootSwitch = createSwitchNavigator(
+const AppNavigator = createSwitchNavigator(
   {
-    Loading,
-    SignUp,
-    Login,
-    Main,
-    EventInfo,
-    Interests,
-    Profile
+    Loading: {screen: Loading },
+    SignUp: {screen: SignUp },
+    Login: {screen: Login },
+    Main: {screen: Main},
+    EventInfo: {screen: EventInfo},
+    Interests: {screen: Interests},
+    Profile: {screen: Profile},
 
   },
   {
@@ -26,5 +26,7 @@ const RootSwitch = createSwitchNavigator(
   }
 )
 
-const App = createAppContainer(RootSwitch)
-export default App
+const AppContainer = createAppContainer(AppNavigator)
+
+export default AppContainer
+

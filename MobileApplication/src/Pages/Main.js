@@ -2,15 +2,15 @@ import React from 'react'
 import Profile from '../Pages/Profile'
 import CreateEvent from '../Pages/CreateEvent'
 import Events from '../Pages/Events'
-import {Container, Header,Icon,Button,Body, Title, Tabs,Tab, Right} from 'native-base';
+import { Container, Header, Icon, Button, Body, Title, Tabs, Tab, Right } from 'native-base';
 import firebase from 'react-native-firebase'
 
 
 export default class Main extends React.Component {
- 
-  constructor(props){
+
+  constructor(props) {
     super(props)
-   
+
     this.signOutUser = this.signOutUser.bind(this)
   }
   state = { currentUser: null, }
@@ -18,48 +18,50 @@ export default class Main extends React.Component {
   componentDidMount() {
     const { currentUser } = firebase.auth()
     this.setState({ currentUser })
-}
+  }
 
-signOutUser = async () => {
-  try {
+  signOutUser = async () => {
+    try {
       await firebase.auth().signOut();
       this.props.navigation.navigate('Login');
-  } catch (e) {
+    } catch (e) {
       console.log(e);
+    }
   }
-}
 
 
-  
-render() {
-  
-return (
+
+  render() {
+
+    return (
       <Container>
         <Header hasTabs>
-            <Body>
-            <Title  style={{ alignSelf: "center"}}>(Logo)</Title>
-            </Body>
-            <Right>
+          <Body>
+            <Title style={{ alignSelf: "center" }}>Event App</Title>
+          </Body>
+          <Right>
             <Button transparent onPress={this.signOutUser}>
               <Icon name="log-out" />
             </Button>
-            </Right>
+          </Right>
         </Header>
-          
+
         <Tabs>
+
+        <Tab heading="Profile">
+            <Profile />
+          </Tab>
           <Tab heading="Events">
-            <Events/>
+            <Events />
           </Tab>
-        
-          <Tab heading="Profile">
-            <Profile/>
-          </Tab>
-          
+
+         
+
           <Tab heading="Create Event">
-            <CreateEvent/>
+            <CreateEvent />
           </Tab>
         </Tabs>
-        
+
       </Container>
     )
   }

@@ -6,7 +6,7 @@ export default class Picture extends Component {
     return (
       <Container>
         <Content>
-          <Thumbnail large source={{uri: uri}} style={{alignSelf: 'center', marginTop: 60}} />
+          <Thumbnail large source={{ uri: uri }} style={{ alignSelf: 'center', marginTop: 60 }} />
         </Content>
       </Container>
     );
